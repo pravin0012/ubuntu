@@ -1,0 +1,31 @@
+---
+- name: Swift | Extract Swift
+  unarchive: src={{swift_url}} dest={{base_dir}} creates={{swift_home}} copy=no
+  tags: swift
+
+- name: Swift | Change Permission
+  shell: find {{swift_home}}/usr/lib/swift/CoreFoundation/* -type f -exec chmod 0644 {} \;
+  tags: swift
+
+- name: Swift | Install clang
+  apt: pkg={{item}} state=present
+  with_items:
+    - clang
+    - libicu-dev
+  tags: swift
+
+- name: Swift | Set softlink
+  become: yes
+  file: state=link force=yes
+        src={{swift_home}}
+        dest={{base_dir}}/swift
+  tags: swift
+
+- name: Swift | Set Path
+  become: yes
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='export PATH=\$PATH:{{base_dir}}/swift/usr/bin'
+              line='export PATH=$PATH:{{base_dir}}/swift/usr/bin'
+              insertafter='EOF'
+  tags: swift

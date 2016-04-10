@@ -1,0 +1,20 @@
+---
+- name: Maven | Extract Maven
+  unarchive: src={{maven_url}} dest={{base_dir}} creates={{maven_home}} copy=no
+  tags: maven
+
+- name: Maven | Set M2_HOME
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='^export M2_HOME'
+              line='export M2_HOME={{maven_home}}'
+              insertafter='EOF'
+  tags: maven
+
+- name: Maven | Set Path
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='export PATH=\$PATH:\$M2_HOME/bin'
+              line='export PATH=$PATH:$M2_HOME/bin'
+              insertafter='EOF'
+  tags: maven

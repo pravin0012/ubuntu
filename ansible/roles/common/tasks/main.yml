@@ -1,0 +1,44 @@
+---
+- name: Common | Update apt cache
+  apt: update-cache=yes
+  tags: common
+
+- name: Common | Install packages
+  apt: pkg={{item}} state=present
+  with_items:
+    - build-essential
+    - wget
+    - curl
+    - unzip
+    - python
+    - python-pip
+    - git
+  tags: common
+
+- name: Common | Update language
+  apt: pkg=language-pack-en
+  tags: common
+
+- name: Common | Install locale {{locale}}
+  command: /usr/sbin/locale-gen {{locale}}
+  tags: common
+
+- name: Common | Set locale
+  command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}}
+  tags: common
+
+- name: Common | Set timezone
+  copy: content={{timezone}} dest=/etc/timezone
+        owner=root group=root mode=0644
+        backup=yes
+  tags: common
+  notify:
+  - update timezone
+
+- name: Common | Set timezone
+  file: state=link force=yes
+        src=/usr/share/zoneinfo/{{timezone}}
+        dest=/etc/localtime
+  tags: common
+  notify:
+  - update timezone

@@ -1,0 +1,6 @@
+---
+java_url: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.tar.gz
+java_version: jdk1.8.0_45
+java_download: /tmp/jdk-8u45-linux-x64.tar.gz
+java_home: "{{base_dir}}/{{java_version}}"
+java_jre_home: "{{java_home}}/jre"

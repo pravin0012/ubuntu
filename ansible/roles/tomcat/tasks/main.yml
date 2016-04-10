@@ -1,0 +1,38 @@
+---
+- name: Tomcat | Extract Tomcat
+  unarchive: src={{tomcat_url}} dest={{base_dir}} creates={{tomcat_home}} copy=no
+  tags: tomcat
+
+- name: Tomcat | Set CATALINA_HOME
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='^export CATALINA_HOME'
+              line='export CATALINA_HOME={{tomcat_home}}'
+              insertafter='EOF'
+  tags: tomcat
+
+- name: Tomcat | Set Catalina Env
+  lineinfile: dest='{{tomcat_home}}/bin/setenv.sh'
+              state=present
+              regexp='^export JAVA_HOME'
+              line='export JAVA_HOME=\$JAVA_HOME'
+              insertafter='EOF'
+              create=yes
+  tags: tomcat
+
+- name: Tomcat | Set Catalina Env
+  lineinfile: dest='{{tomcat_home}}/bin/setenv.sh'
+              state=present
+              regexp='^export CATALINA_HOME'
+              line='export CATALINA_HOME={{tomcat_home}}'
+              insertafter='EOF'
+              create=yes
+  tags: tomcat
+
+- name: Tomcat | Set Path
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='export PATH=\$PATH:\$CATALINA_HOME/bin'
+              line='export PATH=$PATH:$CATALINA_HOME/bin'
+              insertafter='EOF'
+  tags: tomcat

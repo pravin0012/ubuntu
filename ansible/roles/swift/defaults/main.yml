@@ -1,0 +1,5 @@
+---
+swift_version: "2.2-SNAPSHOT-2016-01-06-a"
+swift_platform: "ubuntu14.04"
+swift_url: "https://swift.org/builds/ubuntu1404/swift-{{swift_version}}/swift-{{swift_version}}-{{swift_platform}}.tar.gz"
+swift_home: "{{base_dir}}/swift-{{swift_version}}-{{swift_platform}}"

@@ -1,0 +1,20 @@
+---
+- name: Gradle | Extract Gradle
+  unarchive: src={{gradle_url}} dest={{base_dir}} creates={{gradle_home}} copy=no
+  tags: gradle
+
+- name: Gradle | Set GRADLE_HOME
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='^export GRADLE_HOME'
+              line='export GRADLE_HOME={{gradle_home}}'
+              insertafter='EOF'
+  tags: gradle
+
+- name: Gradle | Set Path
+  lineinfile: dest={{path_file}}
+              state=present
+              regexp='export PATH=\$PATH:\$GRADLE_HOME/bin'
+              line='export PATH=$PATH:$GRADLE_HOME/bin'
+              insertafter='EOF'
+  tags: gradle

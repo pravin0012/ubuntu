@@ -1,0 +1,47 @@
+---
+- name: Docker | Install HTTPS transport and CA certificates
+  apt: pkg={{item}} state=present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+  tags: docker
+
+- name: Docker | Fetch GPG key
+  command: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  tags: docker
+
+- name: Docker | Add repository
+  shell:
+    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+  tags: docker
+
+- name: Docker | Purge Old Repo
+  apt: pkg=lxc-docker purge=yes state=absent update-cache=yes
+  tags: docker
+
+- name: Docker | Gather Ubuntu Version
+  shell: uname -r
+  register: uname_result
+  tags: docker
+
+- name: Docker | Install Docker Kernel Package
+  apt: pkg='linux-image-extra-{{uname_result.stdout}}' state=present
+  tags: docker
+
+- name: Docker | Install Docker Engine
+  apt: pkg=docker-engine state=present update-cache=yes
+  tags: docker
+  notify:
+  - restart docker
+
+- name: Docker | Set user group
+  user: name={{ansible_user_id}} group=docker
+  tags: docker
+
+- name: Docker | Trigger docker restart
+  meta: flush_handlers
+  tags: docker
+
+- name: Docker | Run docker
+  service: name=docker state=restarted
+  tags: docker

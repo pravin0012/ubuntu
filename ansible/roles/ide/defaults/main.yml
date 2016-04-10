@@ -1,0 +1,14 @@
+---
+eclipse_url: http://ftp.yz.yamagata-u.ac.jp/pub/eclipse//technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-linux-gtk-x86_64.tar.gz
+eclipse_version: eclipse-jee-mars-1-linux-gtk-x86_64
+eclipse_home: "{{base_dir}}/{{eclipse_version}}"
+
+pycharm_url: https://download.jetbrains.com/python/pycharm-community-5.0.3.tar.gz
+pycharm_download: /tmp/pycharm-community-5.0.3.tar.gz
+pycharm_version: pycharm-community-5.0.3
+pycharm_home: "{{base_dir}}/{{pycharm_version}}"
+
+intellij_url: https://download.jetbrains.com/idea/ideaIC-2016.1.tar.gz
+intellij_download: /tmp/ideaIC-2016.1.tar.gz
+intellij_version: idea-IC-145.258.11
+intellij_home: "{{base_dir}}/{{intellij_version}}"

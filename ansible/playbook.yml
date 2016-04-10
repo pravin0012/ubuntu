@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - common
+    - gui
+    - ruby
+    - nodejs
+    - mongodb
+    - yo
+    - express
+    - nginx
+    - swift
+    - java
+    - maven
+    - gradle
+    - tomcat
+    - ide
+    - docker

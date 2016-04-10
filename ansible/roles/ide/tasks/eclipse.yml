@@ -1,0 +1,6 @@
+---
+- name: Eclipse | Extract Eclipse
+  unarchive: src={{eclipse_url}} dest={{base_dir}} creates={{eclipse_home}} copy=no
+  tags:
+    - ide
+    - eclipse

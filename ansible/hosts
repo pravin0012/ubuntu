@@ -1,0 +1,5 @@
+[vagrant]
+localhost
+
+[vagrant:vars]
+ansible_user=vagrant

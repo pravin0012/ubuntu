@@ -1,0 +1,4 @@
+---
+maven_url: http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
+maven_version: apache-maven-3.3.3
+maven_home: "{{base_dir}}/{{maven_version}}"

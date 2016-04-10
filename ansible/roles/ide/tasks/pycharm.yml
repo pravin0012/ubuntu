@@ -1,0 +1,45 @@
+---
+- name: Pycharm | Install Python Dev
+  apt: pkg={{item}} state=present
+  with_items:
+    - python-dev
+    - python-pip
+  tags:
+    - ide
+    - pycharm
+
+- name: Pycharm | Check Pycharm Archive Exists
+  stat: path={{pycharm_download}}
+  register: pycharm_download_file
+  tags: 
+    - ide
+    - pycharm
+
+- name: Pycharm | Download Pycharm
+  get_url: url={{pycharm_url}} dest={{pycharm_download}} validate_certs=no
+  when: not pycharm_download_file.stat.exists
+  tags: 
+    - ide
+    - pycharm
+
+- name: Pycharm | Extract Pycharm
+  unarchive: src={{pycharm_download}} dest={{base_dir}} creates={{pycharm_home}} copy=no
+  tags: 
+    - ide
+    - pycharm
+
+- name: Pycharm | Set softlink
+  become: yes
+  file: state=link force=yes
+        src={{pycharm_home}}
+        dest={{base_dir}}/pycharm
+  tags:
+    - ide
+    - pycharm
+
+- name: Pycharm | Clean up
+  file: path={{pycharm_download}} state=absent
+  tags: 
+    - ide
+    - pycharm
+
