@@ -1,20 +1,6 @@
 ---
-- name: IntelliJ | Check IntelliJ Archive Exists
-  stat: path={{intellij_download}}
-  register: intellij_download_file
-  tags: 
-    - ide
-    - intellij
-
-- name: IntelliJ | Download IntelliJ
-  get_url: url={{intellij_url}} dest={{intellij_download}} validate_certs=no
-  when: not intellij_download_file.stat.exists
-  tags: 
-    - ide
-    - intellij
-
 - name: IntelliJ | Extract IntelliJ
-  unarchive: src={{intellij_download}} dest={{base_dir}} creates={{intellij_home}} copy=no
+  unarchive: src={{intellij_url}} dest={{base_dir}} creates={{intellij_home}} copy=no validate_certs=no
   tags: 
     - ide
     - intellij
@@ -25,11 +11,5 @@
         src={{intellij_home}}
         dest={{base_dir}}/intellij
   tags:
-    - ide
-    - intellij
-
-- name: IntelliJ | Clean up
-  file: path={{intellij_download}} state=absent
-  tags: 
     - ide
     - intellij

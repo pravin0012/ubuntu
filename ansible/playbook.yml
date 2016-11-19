@@ -7,8 +7,8 @@
     - ruby
     - nodejs
     - mongodb
-    - yo
-    - express
+#    - yo
+#    - express
     - nginx
     - swift
     - java

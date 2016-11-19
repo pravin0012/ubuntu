@@ -1,2 +1,2 @@
 ---
-repository: deb https://apt.dockerproject.org/repo ubuntu-trusty main
+repository: deb https://apt.dockerproject.org/repo ubuntu-xenial main

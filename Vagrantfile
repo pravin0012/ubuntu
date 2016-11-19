@@ -1,6 +1,6 @@
 VAGRANTFILE_API_VERSION ||= "2"
 
-box = "box-cutter/ubuntu1404-desktop"
+box = "box-cutter/ubuntu1604-desktop"
 name = "vagrant-ansible-dev"
 mem = "4024"
 ipaddr = "192.168.0.90"

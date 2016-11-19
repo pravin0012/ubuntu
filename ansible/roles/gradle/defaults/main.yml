@@ -1,4 +1,4 @@
 ---
-gradle_url: https://services.gradle.org/distributions/gradle-2.4-bin.zip
-gradle_version: gradle-2.4
+gradle_url: https://services.gradle.org/distributions/gradle-3.2-bin.zip
+gradle_version: gradle-3.2
 gradle_home: "{{base_dir}}/{{gradle_version}}"

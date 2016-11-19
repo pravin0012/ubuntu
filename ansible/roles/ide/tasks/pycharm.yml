@@ -8,22 +8,8 @@
     - ide
     - pycharm
 
-- name: Pycharm | Check Pycharm Archive Exists
-  stat: path={{pycharm_download}}
-  register: pycharm_download_file
-  tags: 
-    - ide
-    - pycharm
-
-- name: Pycharm | Download Pycharm
-  get_url: url={{pycharm_url}} dest={{pycharm_download}} validate_certs=no
-  when: not pycharm_download_file.stat.exists
-  tags: 
-    - ide
-    - pycharm
-
 - name: Pycharm | Extract Pycharm
-  unarchive: src={{pycharm_download}} dest={{base_dir}} creates={{pycharm_home}} copy=no
+  unarchive: src={{pycharm_url}} dest={{base_dir}} creates={{pycharm_home}} copy=no validate_certs=no
   tags: 
     - ide
     - pycharm
@@ -36,10 +22,3 @@
   tags:
     - ide
     - pycharm
-
-- name: Pycharm | Clean up
-  file: path={{pycharm_download}} state=absent
-  tags: 
-    - ide
-    - pycharm
-

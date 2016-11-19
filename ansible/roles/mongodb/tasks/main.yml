@@ -5,7 +5,7 @@
 
 - name: MongoDB | Add repository
   shell:
-    echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+    echo "{{repository}}" | sudo tee /etc/apt/sources.list.d/{{mongodb_list}}
   tags: mongodb
 
 - name: MongoDB | Install latest mongodb
@@ -15,7 +15,14 @@
 - name: MongoDB | Push default configuration template
   template:
     src=mongod.conf.j2
-    dest=/etc/mongod.conf
+    dest={{mongodb_conf}}
+    owner=root group=root mode=0644
+  tags: mongodb
+
+- name: MongoDB | Create systemd service file
+  template:
+    src=mongod.service.j2
+    dest=/lib/systemd/system/mongod.service
     owner=root group=root mode=0644
   tags: mongodb
   notify:

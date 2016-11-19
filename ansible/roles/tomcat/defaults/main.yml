@@ -1,4 +1,4 @@
 ---
-tomcat_url: http://apache.communilink.net/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz
-tomcat_version: apache-tomcat-7.0.68
+tomcat_url: http://apache.website-solution.net/tomcat/tomcat-7/v7.0.73/bin/apache-tomcat-7.0.73.tar.gz
+tomcat_version: apache-tomcat-7.0.73
 tomcat_home: "{{base_dir}}/{{tomcat_version}}"
