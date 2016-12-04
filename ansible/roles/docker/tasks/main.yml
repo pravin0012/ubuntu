@@ -19,13 +19,8 @@
   apt: pkg=lxc-docker purge=yes state=absent update-cache=yes
   tags: docker
 
-- name: Docker | Gather Ubuntu Version
-  shell: uname -r
-  register: uname_result
-  tags: docker
-
 - name: Docker | Install Docker Kernel Package
-  apt: pkg='linux-image-extra-{{uname_result.stdout}}' state=present
+  apt: pkg='linux-image-extra-{{ansible_kernel}}' state=present
   tags: docker
 
 - name: Docker | Install Docker Engine
@@ -33,6 +28,13 @@
   tags: docker
   notify:
   - restart docker
+
+- name: Docker | Install Docker Compose
+  get_url:
+    url: "{{docker_compose_url}}"
+    dest: /usr/local/bin/docker-compose
+    mode: a+x
+  tags: docker
 
 - name: Docker | Set user group
   user: name={{ansible_user}} group=docker
