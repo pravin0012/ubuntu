@@ -2,3 +2,4 @@
 - include: eclipse.yml
 - include: pycharm.yml
 - include: intellij.yml
+- include: phpstorm.yml

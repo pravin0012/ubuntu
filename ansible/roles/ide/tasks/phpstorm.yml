@@ -1,0 +1,15 @@
+---
+- name: PhpStorm | Extract PhpStorm
+  unarchive: src={{phpstorm_url}} dest={{base_dir}} creates={{phpstorm_home}} copy=no validate_certs=no
+  tags: 
+    - ide
+    - phpstorm
+
+- name: PhpStorm | Set softlink
+  become: yes
+  file: state=link force=yes
+        src={{phpstorm_home}}
+        dest={{base_dir}}/phpstorm
+  tags:
+    - ide
+    - phpstorm
