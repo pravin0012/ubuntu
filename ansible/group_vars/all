@@ -1,3 +1,4 @@
 ---
 base_dir: /opt
 path_file: /etc/bash.bashrc
+mysql_root_password: abc123

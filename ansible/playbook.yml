@@ -9,6 +9,8 @@
     - mongodb
     - yo
     - express
+    - mysql
+    - php
     - nginx
     - swift
     - java
